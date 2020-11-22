@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
 
 from .models import User
+from .permissions import IsAdminOrReadOnly
 from .serializer import (
     ReadOnlyUserSerializerSerializer as ReadUser,
     WriteOnlyUserSerializerSerializer as WriteUser
@@ -15,7 +16,7 @@ from .serializer import (
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
 
     def get_serializer_class(self):
         if self.action in ('list', 'retrieve'):

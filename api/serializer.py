@@ -18,7 +18,7 @@ class ReadOnlyUserSerializerSerializer(serializers.ModelSerializer):
 
 
 class WriteOnlyUserSerializerSerializer(serializers.ModelSerializer):
-    first_name = serializers.CharField(max_length=30)
+    first_name = serializers.CharField(max_length=30, required=False)
     is_active = serializers.BooleanField(
         required=True,
         help_text='Designates whether this user should be treated as active. '
