@@ -2,7 +2,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase, APIClient
 
 from api.models import User
-from api.serializer import ReadOnlyUserSerializerSerializer
+from api.serializer import UserSerializer
 
 
 class UsersTest(APITestCase):
@@ -28,14 +28,14 @@ class UsersTest(APITestCase):
     def test_get_all_users(self):
         resp = self.client.get('/api/v1/users/')
         users = User.objects.all()
-        serializer = ReadOnlyUserSerializerSerializer(users, many=True)
+        serializer = UserSerializer(users, many=True)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data, serializer.data)
 
     def test_get_one_user(self):
         resp = self.client.get(f'/api/v1/users/{self.user1.pk}/')
         user = User.objects.get(pk=self.user1.pk)
-        serializer = ReadOnlyUserSerializerSerializer(user)
+        serializer = UserSerializer(user)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data, serializer.data)
 

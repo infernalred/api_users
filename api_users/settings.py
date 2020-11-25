@@ -127,7 +127,8 @@ SWAGGER_SETTINGS = {
             'name': 'Authorization',
             'in': 'header'
         }
-    }
+    },
+    'DEFAULT_AUTO_SCHEMA_CLASS': 'api.serializer.ReadWriteAutoSchema',
 }
 
 # Internationalization
